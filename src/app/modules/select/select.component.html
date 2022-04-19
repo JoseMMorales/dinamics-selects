@@ -3,8 +3,8 @@
 <mat-form-field appearance="fill">
   <mat-label>Favorite country</mat-label>
   <mat-select>
-    <mat-option *ngFor="let country of countries" [value]="country.value">
-      {{country.viewValue}}
+    <mat-option *ngFor="let country of countries" [value]="country.name">
+      {{country.name}}
     </mat-option>
   </mat-select>
 </mat-form-field>
@@ -13,9 +13,9 @@
 <mat-form-field appearance="fill">
   <mat-label>Favorite city</mat-label>
   <mat-select>
-    <mat-option *ngFor="let city of cities" [value]="city.value">
+    <!-- <mat-option *ngFor="let city of cities" [value]="city.value">
       {{city.viewValue}}
-    </mat-option>
+    </mat-option> -->
   </mat-select>
 </mat-form-field>
 

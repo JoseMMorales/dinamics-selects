@@ -1,14 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
-interface Country {
-  value: string;
-  viewValue: string;
-};
+import { ApiService } from 'src/app/core/services/api.service';
+import { Cities } from '../../core/models/city.interface';
+import { Countries, CountryData } from '../../core/models/country.interface';
 
-interface Cities {
-  value: string;
-  viewValue: string;
-}
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-select',
@@ -17,21 +13,18 @@ interface Cities {
 })
 export class SelectComponent implements OnInit {
 
-  countries: Country[] = [
-    {value: 'Spain', viewValue: 'Spain'},
-    {value: 'UK', viewValue: 'UK'},
-    {value: 'France', viewValue: 'France'},
-  ];
+  countries: CountryData[] | undefined;
+  cities: Cities[] = [];
 
-  cities: Cities[] = [
-    {value: 'Madrid', viewValue: 'Madrid'},
-    {value: 'Paris', viewValue: 'Paris'},
-    {value: 'London', viewValue: 'London'},
-  ];
+  constructor(private apiService: ApiService) { }
 
-  constructor() { }
-
-  ngOnInit(): void {
+  ngOnInit() {
+    this.renderCountries();
   }
 
+  renderCountries(): void {
+    this.apiService.getCountries().pipe(
+      map((countries: Countries) => countries.data)
+    ).subscribe((countries: CountryData[]) => this.countries = countries);
+  }
 }
