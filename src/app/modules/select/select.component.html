@@ -1,12 +1,21 @@
-<p>select works!</p>
-<p>select works!</p>
-<p>select works!</p>
-<p>select works!</p>
-<p>select works!</p>
-<p>select works!</p>
-<p>select works!</p>
-<p>select works!</p>
-<p>select works!</p>
-<p>select works!</p>
-<p>select works!</p>
-<p>select works!</p>
+
+<h4>Countries</h4>
+<mat-form-field appearance="fill">
+  <mat-label>Favorite country</mat-label>
+  <mat-select>
+    <mat-option *ngFor="let country of countries" [value]="country.value">
+      {{country.viewValue}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<h4>Cities</h4>
+<mat-form-field appearance="fill">
+  <mat-label>Favorite city</mat-label>
+  <mat-select>
+    <mat-option *ngFor="let city of cities" [value]="city.value">
+      {{city.viewValue}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
