@@ -10,3 +10,7 @@ export interface CountryData {
     iso3: string;
     unicodeFlag: string;
 }
+
+export interface Country {
+  country: string;
+}

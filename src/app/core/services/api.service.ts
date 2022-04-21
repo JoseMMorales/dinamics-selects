@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 import { Cities } from '../models/city.interface';
-import { Countries } from '../models/country.interface';
+import { Countries, Country } from '../models/country.interface';
 
 
 @Injectable({
@@ -20,7 +20,7 @@ export class ApiService {
     return this.http.get<Countries>(url);
   }
 
-  getCities(country: string): Observable<Cities> {
+  getCities(country: Country): Observable<Cities> {
     let url = environment.cityURL;
 
     return this.http.post<Cities>(url, country);
