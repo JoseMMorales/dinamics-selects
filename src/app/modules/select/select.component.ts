@@ -4,7 +4,7 @@ import { ApiService } from 'src/app/core/services/api.service';
 import { Cities } from '../../core/models/city.interface';
 import { Countries, CountryData } from '../../core/models/country.interface';
 
-import { map } from 'rxjs/operators';
+import { finalize, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-select',
@@ -15,6 +15,7 @@ export class SelectComponent implements OnInit {
 
   countries: CountryData[] | undefined;
   cities: Cities[] = [];
+  isLoading: boolean = false;
 
   constructor(private apiService: ApiService) { }
 
@@ -23,8 +24,10 @@ export class SelectComponent implements OnInit {
   }
 
   renderCountries(): void {
+    this.isLoading = true;
     this.apiService.getCountries().pipe(
-      map((countries: Countries) => countries.data)
+      map((countries: Countries) => countries.data),
+      finalize(()=>this.isLoading = false)
     ).subscribe((countries: CountryData[]) => this.countries = countries);
   }
 }

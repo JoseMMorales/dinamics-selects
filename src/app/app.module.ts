@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { ApiService } from './core/services/api.service';
+import { SharedModule } from './shared/shared.module';
 
 const ANGULAR_MODULES = [
   BrowserModule,
@@ -16,7 +17,8 @@ const ANGULAR_MODULES = [
   MaterialModule,
   FormsModule,
   ReactiveFormsModule,
-  HttpClientModule
+  HttpClientModule,
+  SharedModule
 ]
 @NgModule({
   declarations: [AppComponent],

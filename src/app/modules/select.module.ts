@@ -4,6 +4,7 @@ import { SelectRoutingModule } from './select-routing.module';
 
 import { SelectComponent } from './select/select.component';
 import { MaterialModule } from '../core/material.module';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { MaterialModule } from '../core/material.module';
   imports: [
     CommonModule,
     SelectRoutingModule,
-    MaterialModule
+    MaterialModule,
+    SharedModule
   ]
 })
 export class SelectModule { }
