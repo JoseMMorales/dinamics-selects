@@ -5,7 +5,7 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-    import('./modules/select.module').then( m => m.SelectModule )
+    import('./modules/select/select.module').then( m => m.SelectModule )
   },
 ];
 
