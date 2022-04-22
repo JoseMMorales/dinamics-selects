@@ -1,0 +1,10 @@
+<div class="container">
+  <app-select-form
+  [countries] = "countries"
+  [cities] = "cities"
+  (countryChanges)="onSelectCity($event)"
+  ></app-select-form>
+</div>
+
+<app-loading [isLoading]="isLoading"></app-loading>
+

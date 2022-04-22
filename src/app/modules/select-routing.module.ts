@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { SelectComponent } from './select/select.component';
+import { SelectComponent } from './select/pages/select.component';
 
 const routes: Routes = [
   { path: '',

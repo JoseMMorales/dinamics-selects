@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ApiService } from 'src/app/core/services/api.service';
-import { Cities } from '../../core/models/city.interface';
-import { Countries, CountryData } from '../../core/models/country.interface';
+import { Cities } from '../../../core/models/city.interface';
+import { Countries, CountryData } from '../../../core/models/country.interface';
 
-import { finalize, map, tap } from 'rxjs/operators';
+import { finalize, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-select',
@@ -13,8 +13,8 @@ import { finalize, map, tap } from 'rxjs/operators';
 })
 export class SelectComponent implements OnInit {
 
-  countries: CountryData[] | undefined;
-  cities: string[] = [];
+  countries!: CountryData[];
+  cities!: string[];
   isLoading: boolean = false;
 
   constructor(private apiService: ApiService) { }
