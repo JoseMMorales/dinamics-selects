@@ -5,6 +5,8 @@ import { Cities } from '../../../core/models/city.interface';
 import { Countries, CountryData } from '../../../core/models/country.interface';
 
 import { finalize, map } from 'rxjs/operators';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ToastService } from '../../../shared/services/toast.service';
 
 @Component({
   selector: 'app-select',
@@ -17,7 +19,10 @@ export class SelectComponent implements OnInit {
   cities!: string[];
   isLoading: boolean = false;
 
-  constructor(private apiService: ApiService) { }
+  constructor(
+    private apiService: ApiService,
+    private toast: ToastService
+  ) { }
 
   ngOnInit() {
     this.renderCountries();
@@ -28,7 +33,10 @@ export class SelectComponent implements OnInit {
     this.apiService.getCountries().pipe(
       map((countries: Countries) => countries.data),
       finalize(()=>this.isLoading = false)
-    ).subscribe((countries: CountryData[]) => this.countries = countries);
+    ).subscribe(
+      (countries: CountryData[]) => this.countries = countries,
+      (httpError: HttpErrorResponse) => this.toast.onError(httpError)
+    );
   }
 
   onSelectCity(country: string): void {
@@ -38,6 +46,12 @@ export class SelectComponent implements OnInit {
     this.apiService.getCities(data).pipe(
       finalize(()=>this.isLoading = false),
       map((cities: Cities) => cities.data),
-    ).subscribe((cities: string[]) => this.cities = cities);
+    ).subscribe(
+      (cities: string[]) => {
+        this.cities = cities;
+        this.toast.onSuccess('City Selection Ready...');
+      },
+      (httpError: HttpErrorResponse) => this.toast.onError(httpError)
+    );
   }
 }
