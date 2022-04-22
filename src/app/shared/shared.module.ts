@@ -5,6 +5,8 @@ import { HotToastModule } from '@ngneat/hot-toast';
 
 import { LoadingComponent } from './component/loading/loading.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+
 import { ToastService } from './services/toast.service';
 
 const SHARED_COMPONENTS = [ LoadingComponent ];
@@ -16,7 +18,8 @@ const ANGULAR_MODULES = [
 ];
 
 const THIRD_PARTIES_MODULE = [
-  MaterialModule
+  MaterialModule,
+  NgxMatSelectSearchModule
 ];
 
 @NgModule({
