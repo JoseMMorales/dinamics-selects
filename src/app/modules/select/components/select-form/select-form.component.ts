@@ -23,17 +23,17 @@ import { CountryData } from 'src/app/core/models/country.interface';
   styleUrls: ['./select-form.component.scss'],
 })
 export class SelectFormComponent implements OnInit, OnChanges, OnDestroy {
-  @Input() countries: CountryData[] | undefined;
-  @Input() cities: string[] | undefined;
+  @Input() countries: CountryData[] = [];
+  @Input() cities: string[] = [];
   @Output() countryChanges = new EventEmitter<string>();
 
   form!: FormGroup;
   countriesFilterCtrl: FormControl = new FormControl();
   citiesFilterCtrl: FormControl = new FormControl();
-  filteredCountries: ReplaySubject<CountryData[]> = new ReplaySubject<
+  filteredCountries$: ReplaySubject<CountryData[]> = new ReplaySubject<
     CountryData[]
   >();
-  filteredCities: ReplaySubject<string[]> = new ReplaySubject<string[]>();
+  filteredCities$: ReplaySubject<string[]> = new ReplaySubject<string[]>();
   valueChangesCountry!: Subscription;
   valueChangesCity!: Subscription;
 
@@ -44,10 +44,20 @@ export class SelectFormComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges() {
-    this.setUpCountry();
-    this.setUpCity();
-    this.countryFilterChanges();
-    this.cityFilterChanges();
+    this.setupSelect(this.countries, this.filteredCountries$);
+    this.setupSelect(this.cities, this.filteredCities$);
+    this.selectFilterChanges(
+      this.countries,
+      this.countriesFilterCtrl,
+      this.filteredCountries$,
+      this.valueChangesCountry
+    ),
+      this.selectFilterChanges(
+        this.cities,
+        this.citiesFilterCtrl,
+        this.filteredCities$,
+        this.valueChangesCity
+      );
   }
 
   ngOnDestroy() {
@@ -69,53 +79,49 @@ export class SelectFormComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  private setUpCountry(): void {
-    this.filteredCountries.next(this.countries);
+  private setupSelect(
+    arrayToFilter: string[] | CountryData[],
+    filteredData$: ReplaySubject<any[]>
+  ): void {
+    filteredData$.next(arrayToFilter);
   }
 
-  private setUpCity(): void {
-    this.filteredCities.next(this.cities);
-  }
-
-  private countryFilterChanges(): void {
-    this.valueChangesCountry = this.countriesFilterCtrl.valueChanges.subscribe(
-      () => this.filterSelectCountry()
+  private selectFilterChanges(
+    arrayToFilter: string[] | CountryData[],
+    filterCtr: FormControl,
+    filteredData$: ReplaySubject<any[]>,
+    valuesChangeSelect: Subscription
+  ): void {
+    valuesChangeSelect = filterCtr.valueChanges.subscribe(() =>
+      this.filterSelect(arrayToFilter, filterCtr, filteredData$)
     );
   }
 
-  private cityFilterChanges(): void {
-    this.valueChangesCity = this.citiesFilterCtrl.valueChanges.subscribe(() =>
-      this.filterSelectCity()
-    );
-  }
+  private filterSelect(
+    arrayToFilter: string[] | CountryData[],
+    filterCtr: FormControl,
+    filteredData$: ReplaySubject<any[]>
+  ): void {
+    let isStrings = (obj: string[] | CountryData[]): obj is string[] =>
+      typeof obj[0] === 'string';
 
-  private filterSelectCountry(): void {
-    if (!this.countries) {
+    if (!arrayToFilter) {
       return;
     }
 
-    let search = this.countriesFilterCtrl.value;
-    !search && this.filteredCountries.next(this.countries);
+    let search = filterCtr.value;
+    !search && filteredData$.next(arrayToFilter);
 
-    this.filteredCountries.next(
-      this.countries.filter((country: CountryData) =>
-        country.name.toLowerCase().startsWith(search.toLowerCase())
-      )
-    );
-  }
-
-  private filterSelectCity(): void {
-    if (!this.cities) {
-      return;
-    }
-
-    let search = this.citiesFilterCtrl.value;
-    !search && this.filteredCities.next(this.cities);
-
-    this.filteredCities.next(
-      this.cities.filter((city: string) =>
-        city.toLowerCase().startsWith(search.toLowerCase())
-      )
-    );
+    isStrings(arrayToFilter)
+      ? filteredData$.next(
+          arrayToFilter.filter((city: string) =>
+            city.toLowerCase().startsWith(search.toLowerCase())
+          )
+        )
+      : filteredData$.next(
+          arrayToFilter.filter((country: { name: string }) =>
+            country.name.toLowerCase().startsWith(search.toLowerCase())
+          )
+        );
   }
 }

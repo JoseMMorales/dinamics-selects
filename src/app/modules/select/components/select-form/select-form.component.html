@@ -18,7 +18,7 @@
         ></ngx-mat-select-search>
       </mat-option>
       <mat-option
-        *ngFor="let country of filteredCountries | async"
+        *ngFor="let country of filteredCountries$ | async"
         [value]="country.name"
       >
         {{country.name}}
@@ -42,7 +42,7 @@
         ></ngx-mat-select-search>
       </mat-option>
       <mat-option
-        *ngFor="let city of filteredCities | async"
+        *ngFor="let city of filteredCities$ | async"
         [value]="city"
       >
         {{city}}
