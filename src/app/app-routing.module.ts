@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RequiredDataGuard } from './modules/select/guard/required-data.guard';
+import { RequiredDataGuard } from './core/guard/required-data.guard';
 
 const routes: Routes = [
   {
