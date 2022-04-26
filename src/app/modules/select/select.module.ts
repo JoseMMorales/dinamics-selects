@@ -6,13 +6,8 @@ import { SharedModule } from '../../shared/shared.module';
 import { SelectComponent } from './pages/select.component';
 import { SelectFormComponent } from './components/select-form/select-form.component';
 
-
 @NgModule({
-  declarations: [ SelectComponent, SelectFormComponent ],
-  imports: [
-    CommonModule,
-    SelectRoutingModule,
-    SharedModule,
-  ]
+  declarations: [SelectComponent, SelectFormComponent],
+  imports: [CommonModule, SelectRoutingModule, SharedModule],
 })
-export class SelectModule { }
+export class SelectModule {}

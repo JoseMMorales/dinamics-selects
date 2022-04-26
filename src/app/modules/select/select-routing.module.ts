@@ -4,16 +4,27 @@ import { RouterModule, Routes } from '@angular/router';
 import { SelectComponent } from './pages/select.component';
 
 const routes: Routes = [
-  { path: '',
+  {
+    path: '',
     children: [
-      { path: '', component: SelectComponent },
-      { path: 'select', component: SelectComponent }
-    ] },
-  { path: '**', redirectTo: 'select' }
+      {
+        path: '',
+        component: SelectComponent,
+      },
+      {
+        path: 'select',
+        component: SelectComponent,
+      },
+    ],
+  },
+  {
+    path: '**',
+    redirectTo: 'not-found',
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class SelectRoutingModule { }
+export class SelectRoutingModule {}

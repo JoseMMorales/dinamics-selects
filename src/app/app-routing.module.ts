@@ -5,12 +5,19 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-    import('./modules/select/select.module').then( m => m.SelectModule )
+      import('./modules/select/select.module').then((m) => m.SelectModule),
+  },
+  {
+    path: 'not-found',
+    loadChildren: () =>
+      import('./modules/not-found/not-found.module').then(
+        (m) => m.NotFoundModule
+      ),
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
