@@ -8,19 +8,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 import { ToastService } from './services/toast.service';
+import { HeaderComponent } from './component/header/header.component';
 
-const SHARED_COMPONENTS = [ LoadingComponent ];
+const SHARED_COMPONENTS = [LoadingComponent, HeaderComponent];
 
-const ANGULAR_MODULES = [
-  CommonModule,
-  ReactiveFormsModule,
-  FormsModule,
-];
+const ANGULAR_MODULES = [CommonModule, ReactiveFormsModule, FormsModule];
 
-const THIRD_PARTIES_MODULE = [
-  MaterialModule,
-  NgxMatSelectSearchModule
-];
+const THIRD_PARTIES_MODULE = [MaterialModule, NgxMatSelectSearchModule];
 
 @NgModule({
   declarations: [...SHARED_COMPONENTS],
@@ -32,11 +26,7 @@ const THIRD_PARTIES_MODULE = [
       dismissible: true,
     }),
   ],
-  exports: [
-    ...SHARED_COMPONENTS,
-    ...ANGULAR_MODULES,
-    ...THIRD_PARTIES_MODULE
-  ],
+  exports: [...SHARED_COMPONENTS, ...ANGULAR_MODULES, ...THIRD_PARTIES_MODULE],
   providers: [ToastService],
 })
-export class SharedModule { }
+export class SharedModule {}

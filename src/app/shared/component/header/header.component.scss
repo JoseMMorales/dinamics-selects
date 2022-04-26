@@ -1,0 +1,11 @@
+mat-toolbar {
+    display: flex;
+    justify-content: center;
+
+    position: fixed;
+
+    span {
+        font-family: cursive;
+        font-weight: bold;
+    }
+}

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { ApiService } from 'src/app/core/services/api.service';
 import { Cities } from '../../../core/models/city.interface';
-import { Countries, CountryData } from '../../../core/models/country.interface';
+import { CountryData } from '../../../core/models/country.interface';
 
 import { finalize, map } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
