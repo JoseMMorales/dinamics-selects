@@ -1,11 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RequiredDataGuard } from './core/guard/required-data.guard';
+import { RequiredDataGuard } from './core/guards/required-data.guard';
+import { DataResolver } from './core/resolvers/data-resolver.resolver';
 
 const routes: Routes = [
   {
     path: '',
     canActivate: [RequiredDataGuard],
+    resolve: {
+      countries: DataResolver,
+    },
     loadChildren: () =>
       import('./modules/select/select.module').then((m) => m.SelectModule),
   },
