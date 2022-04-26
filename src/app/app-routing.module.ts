@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { RequiredDataGuard } from './modules/select/guard/required-data.guard';
 
 const routes: Routes = [
   {
     path: '',
+    canActivate: [RequiredDataGuard],
     loadChildren: () =>
       import('./modules/select/select.module').then((m) => m.SelectModule),
   },
@@ -13,6 +15,10 @@ const routes: Routes = [
       import('./modules/not-found/not-found.module').then(
         (m) => m.NotFoundModule
       ),
+  },
+  {
+    path: '**',
+    redirectTo: 'not-found',
   },
 ];
 

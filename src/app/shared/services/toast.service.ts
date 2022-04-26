@@ -3,14 +3,13 @@ import { Injectable } from '@angular/core';
 import { HotToastService } from '@ngneat/hot-toast';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ToastService {
-
-  constructor(private toastService: HotToastService) { }
+  constructor(private toastService: HotToastService) {}
 
   onError(httpError: HttpErrorResponse): void {
-    this.toastService.error(httpError?.error?.descripcion);
+    this.toastService.error(httpError.error.msg);
   }
 
   onSuccess(message: string): void {
