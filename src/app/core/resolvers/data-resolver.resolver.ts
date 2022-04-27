@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { ToastService } from 'src/app/shared/services/toast.service';
+import { ToastService } from 'src/app/modules/shared/services/toast.service';
 import { Countries, CountryData } from '../models/country.interface';
 import { ApiService } from '../services/api.service';
 

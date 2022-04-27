@@ -4,7 +4,7 @@ import { CanActivate, Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { ApiService } from 'src/app/core/services/api.service';
-import { ToastService } from 'src/app/shared/services/toast.service';
+import { ToastService } from 'src/app/modules/shared/services/toast.service';
 
 @Injectable({
   providedIn: 'root',

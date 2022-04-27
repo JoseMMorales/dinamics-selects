@@ -1,4 +1,9 @@
+<app-header></app-header>
 <div class="not-found">
-    <h1>Data not found!!</h1>
-    <a mat-raised-button routerLink="/select" color="primary">Back to Select</a>
+    <h1>
+        {{ 'notFound' | translate }}
+    </h1>
+    <a mat-raised-button routerLink="/select" color="primary">
+        {{ 'button.backToSelect' | translate }}
+    </a>
 </div>

@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   countryURL: 'https://countriesnow.space/api/v0.1/countries/',
-  cityURL: 'https://countriesnow.space/api/v0.1/countries/cities'
+  cityURL: 'https://countriesnow.space/api/v0.1/countries/cities',
 };
 
 /*

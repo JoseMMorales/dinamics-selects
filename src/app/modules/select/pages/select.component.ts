@@ -6,8 +6,9 @@ import { CountryData } from '../../../core/models/country.interface';
 
 import { finalize, map } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ToastService } from '../../../shared/services/toast.service';
+import { ToastService } from '../../shared/services/toast.service';
 import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-select',
@@ -22,7 +23,8 @@ export class SelectComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private route: ActivatedRoute,
-    private toast: ToastService
+    private toast: ToastService,
+    private translateService: TranslateService
   ) {}
 
   ngOnInit() {
@@ -48,7 +50,9 @@ export class SelectComponent implements OnInit {
       .subscribe(
         (cities: string[]) => {
           this.cities = cities;
-          this.toast.onSuccess('City Selection Ready...');
+          this.toast.onSuccess(
+            this.translateService.instant('onSuccess.city') as string
+          );
         },
         (httpError: HttpErrorResponse) => this.toast.onError(httpError)
       );

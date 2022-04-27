@@ -5,12 +5,12 @@ import { langFile as langGB } from './translations/langGB';
 import { langFile as langSP } from './translations/lang-SP';
 
 export const languages = {
-  es: 'es',
+  sp: 'sp',
   en: 'en',
 };
 
 export class LangLoader implements TranslateLoader {
   getTranslation(lang: string): Observable<unknown> {
-    return lang === languages.en ? of(langGB) : of(langSP);
+    return lang === languages.sp ? of(langGB) : of(langSP);
   }
 }
