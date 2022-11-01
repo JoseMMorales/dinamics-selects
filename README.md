@@ -3,7 +3,7 @@ This project was designed to see how to implement two [ngx-mat-select-search](ht
 
 Internationalization ([i18n](https://www.npmjs.com/package/@ngx-translate/core/v/13.0.0)) library for Angular is another powerfull feature used in this practice for any multilingual App.
 
-### NGX Dependencies in package.json:
+### ngx Dependencies in package.json:
 * `"@ngx-translate/core": "^13.0.0"`
 *  `"ngx-mat-select-search": "^4.1.1"`
 
